@@ -1,0 +1,19 @@
+{% extends "master/base.html" %}
+{% block title %} dashboard...{% endblock %}
+
+
+{% block subtitle %} Home >> Dashbaord {% endblock %}
+
+{% block content %}
+<div class="main-content">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        {% for item in teams %}
+        <h5>{{ item.Name }}</h5>
+        {% endfor%}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
