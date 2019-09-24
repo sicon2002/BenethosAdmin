@@ -13,9 +13,10 @@ class SqlHelper:
         try:
             self.conn = pymssql.connect(self.serverName, self.userName, self.passWord, self.dbName)
             self.cursor = self.conn.cursor()
-            print 'init db success...'
+            print('init db success...')
         except pymssql.Error as e:
-            print('Sql Error 001: %s, %s'%(e.args[0],e.args[1]))
+            print('Sql Error 001')
+            print(e)
 
     def query(self,sql):
         try:

@@ -3,7 +3,7 @@ import os
 from flask import Flask
 from config import dbCfg
 from flask_bootstrap import Bootstrap
-from dbhelper import SqlHelper
+from app.dbhelper import SqlHelper
 
 app = Flask(__name__)
 Bootstrap(app)

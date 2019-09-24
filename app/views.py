@@ -2,14 +2,14 @@
 from flask import render_template, session
 from app import app, db
 
-@app.route('/')
+@app.route('/index')
 def index():
     rlt = db.queryAll('SELECT TOP 10 * FROM NE_Teams')
     try:
         for item in rlt:
-            print item['Name']
+            print(item['Name'])
     except:
-        print ''
+        print('')
     return render_template('index.html', teams = rlt)
 
 @app.route('/login')

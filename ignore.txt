@@ -1,0 +1,6 @@
+*.pyc
+__puycache__/*
+app/__pychache__/*
+logs/*
+web.config
+wfastcgi.py
