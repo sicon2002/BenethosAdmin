@@ -4,3 +4,4 @@ app/__pychache__/*
 logs/*
 web.config
 wfastcgi.py
+.DS_Store

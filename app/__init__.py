@@ -3,12 +3,16 @@ import os
 from flask import Flask
 from config import dbCfg
 from flask_bootstrap import Bootstrap
-from app.dbhelper import SqlHelper
+# from app.helpers.dbhelper import *
+from app.helpers.utils import *
+from app.helpers.logic import *
 
-app = Flask(__name__)
-Bootstrap(app)
-# app.config.from_object('config') # 载入配置文件
-#db = SQLAlchemy(app) # 初始化 db 对象
-db = SqlHelper(dbCfg['serverName'] , dbCfg['userName'] , dbCfg['passWord'], dbCfg['dbName'])
+myapp = Flask(__name__)
+myapp.secret_key = "WhatIsYourSecretKey?"
+Bootstrap(myapp)
 
-from app import views, models, db
+# db = SqlHelper(dbCfg['serverName'] , dbCfg['userName'] , dbCfg['passWord'], dbCfg['dbName'])
+sys = SysHelper()
+logic = LogicHelper()
+
+from app import myapp, views, models, sys, logic

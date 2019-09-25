@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-from app import app
+from app import myapp
 
 if __name__ == '__main__':
-    app.debug = True # 设置调试模式，生产模式的时候要关掉debug
-    app.run() # 启动服务器
+    myapp.debug = True # 设置调试模式，生产模式的时候要关掉debug
+    myapp.run() # 启动服务器
+
+    
