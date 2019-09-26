@@ -1,0 +1,74 @@
+{% extends "master/base.html" %}
+{% block title %} 任务详细 {% endblock %}
+
+{% block subtitle %} 采样任务 >> 我的任务 >> 任务详细 {% endblock %}
+
+{% block content %}
+<div class="main-content">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4> 【 {{ taskInfo.River }} 】 基本情况 </h4>
+                </div>
+                <div class="card-body">
+                    基本信息
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4> 水质结果 </h4>
+                </div>
+                <div class="card-body">
+                    水质结果
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4> 物种管理 </h4>
+                </div>
+                <div class="card-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4> 任务报告管理 </h4>
+                </div>
+                <div class="card-body">
+                    <table class="table table-responsive table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>姓名 | 电话</th>
+                                <th>是否参与者</th>
+                                <th>是否生成报告</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in members %}
+                            <tr>
+                                <th scope="row">{{ item.Id }}</th>
+                                <td>{{ item.UserName }} | {{ item.Mobile }}</td>
+                                <td><span class="badge badge-primary">{{item.IsMember}}</span></td>
+                                <td>否</td>
+                                <td class="color-primary">生成</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -16,5 +16,8 @@ class SysHelper:
         return True
     
     def getLoginUser(self):
-        userObj = session['USER_ONLINE']
-        return User.toObject(userObj)
+        if 'USER_ONLINE' in session:
+            userObj = session['USER_ONLINE']
+            return User.toObject(userObj)
+        else:
+            return redirect(url_for('login'))

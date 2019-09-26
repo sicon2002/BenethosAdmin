@@ -1,7 +1,7 @@
 {% extends "master/base.html" %}
 {% block title %} 组织机构 {% endblock %}
 
-{% block subtitle %} 首页 >> 组织机构 {% endblock %}
+{% block subtitle %} 组织机构 >> 我的团队 {% endblock %}
 
 {% block content %}
 <div class="main-content">
@@ -47,7 +47,7 @@
                                     <td>{{ item.CreatorName }}</td>
                                     <td>{{ item.IvtCode }}</td>
                                     <td>{{ item.LastModificationTime }}</td>
-                                    <td>查看</td>
+                                    <td><a href='/team_members'>查看</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

@@ -1,8 +1,8 @@
 {% extends "master/base.html" %}
-{% block title %} 任务列表 {% endblock %}
+{% block title %} 团队成员 {% endblock %}
 
 
-{% block subtitle %} 采样任务 >> 我的任务 {% endblock %}
+{% block subtitle %} 组织机构 >> 团队 >> 成员 {% endblock %}
 
 {% block content %}
 <div class="main-content">
@@ -11,7 +11,7 @@
             <div class="card">
                 <div class="card alert">
                     <div class="card-header">
-                        <h4>我参与的任务 </h4>
+                        <h4>团队成员 </h4>
                         <div class="card-header-right-icon">
                             <ul>
                                 <li class="card-close" data-dismiss="alert"><i class="ti-close"></i></li>
@@ -33,30 +33,22 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>名称</th>
-                                    <th>地址</th>
-                                    <th>团队</th>
-                                    <th>时间</th>
-                                    <th>状态</th>
+                                    <th>姓名</th>
+                                    <th>手机号</th>
+                                    <th>微信号</th>
+                                    <th>是否成员</th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for item in tasks %}
+                                {% for item in members %}
                                 <tr>
                                     <th scope="row">{{ item.Id }}</th>
-                                    <td>{{ item.River }}</td>
-                                    <td>{{ item.Address }}</td>
-                                    <td>{{ item.Name }}</td>
-                                    <td>{{ item.LastModificationTime }}</td>
-                                    <td><span class="badge badge-{%if item.EvaStatus==0 %}info{% else %}warning{% endif %}">
-                                        {%if item.EvaStatus==0 %}
-                                            已完成
-                                        {% else %}
-                                            进行中
-                                        {% endif %}
-                                    </span></td>
-                                    <td><a href="/task_detail/{{item.Id}}">查看</a> | <a href='task_report_mgr'>报告</a></td>
+                                    <td>{{ item.UserName }}</td>
+                                    <td>{{ item.Mobile }}</td>
+                                    <td>{{ item.WeChat }}</td>
+                                    <td>{{ item.IsMember }}</td>
+                                    <td>查看 | <a href='/task_report_mgr'>报告</a></td>
                                 </tr>
                                 {% endfor %}
                             </tbody>

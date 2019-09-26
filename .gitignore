@@ -5,3 +5,4 @@ logs/*
 web.config
 wfastcgi.py
 .DS_Store
+config.py
