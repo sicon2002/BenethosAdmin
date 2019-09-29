@@ -29,8 +29,21 @@ def task_detail(tsk_id):
 
     rtTaskInfo = logic.getTaskById(tskId)
     rtMembers = logic.getUsersByTeamId(rtTaskInfo[0]['TeamID'])
-
     return render_template('task/task_detail.html', taskInfo = rtTaskInfo[0], members = rtMembers,  user = sys.getLoginUser())
+
+# report
+@app.route('/report/<guid>')
+def report(guid):
+    tskId = int(guid.encode("utf-8"))
+
+    rtTaskInfo = logic.getTaskById(tskId)
+    rtTeamInfo = logic.getTeamById(rtTaskInfo[0]['TeamID'])
+    rtTeamMembers = logic.getUsersByTeamId(rtTaskInfo[0]['TeamID'])
+    rtTaskSamples = logic.getTaskDetailByTaskId(tskId)
+
+    print(rtTaskSamples)
+    return render_template('report/report.html', tskInfo = rtTaskInfo[0], teamInfo = rtTeamInfo[0], teamMembers = rtTeamMembers, tskSmps = rtTaskSamples )
+
 # team
 @app.route('/myteams')
 def myteam():
@@ -44,8 +57,7 @@ def team_members():
     rt = logic.getUsersByTeamId(tid)
     return render_template('organization/team_members.html', members=rt, user = sys.getLoginUser())
 
-
-#account
+# account
 @app.route('/login')
 def login():
     return render_template('account/login.html')

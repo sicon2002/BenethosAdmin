@@ -56,13 +56,15 @@
                         </thead>
                         <tbody>
                             {% for item in members %}
+                            {% if item.IsMember == True %}
                             <tr>
                                 <th scope="row">{{ item.Id }}</th>
                                 <td>{{ item.UserName }} | {{ item.Mobile }}</td>
                                 <td><span class="badge badge-primary">{{item.IsMember}}</span></td>
                                 <td>否</td>
-                                <td class="color-primary">生成</td>
+                                <td class="color-primary">生成 | <a href="/report/{{ item.Id }}">查看</a></td>
                             </tr>
+                            {% endif %}
                             {% endfor %}
                         </tbody>
                     </table>

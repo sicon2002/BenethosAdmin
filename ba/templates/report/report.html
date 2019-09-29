@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Report</title>
+
+	<!-- ================= Favicon ================== -->
+	<!-- Standard -->
+	<link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
+	<!-- Retina iPad Touch Icon-->
+	<link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
+	<!-- Retina iPhone Touch Icon-->
+	<link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
+	<!-- Standard iPad Touch Icon-->
+	<link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
+	<!-- Standard iPhone Touch Icon-->
+	<link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
+
+	<!-- Styles -->
+	<link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
+	<link href="/static/assets/css/lib/themify-icons.css" rel="stylesheet">
+	<link href="/static/assets/css/lib/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/assets/css/lib/nixon.css" rel="stylesheet">
+	<link href="/static/assets/css/style.css" rel="stylesheet">
+	<style>
+		.invoice-a {
+			padding: 0px !important;
+			margin: 0px !important;
+			border-bottom: solid 1px #eee;
+
+		}
+
+		.invoice-b {
+			padding: 0px !important;
+			margin: 0px !important;
+			border-bottom: solid 1px #eee;
+
+			background-color: #ffffff;
+		}
+
+		.bg-white {
+			margin: 0px !important;
+
+		}
+
+		.bg-llgrey {
+			margin: 0px !important;
+			background-color: #f7f7f7;
+		}
+
+		#invoice-bot div {
+			/* border: solid 1px red; */
+		}
+
+		.valueCls {}
+
+		.keyCls {
+			font-weight: bold;
+		}
+
+		.tskimg{
+			width:200px;
+			height:200px;
+			padding:5px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div id="invoice" class="effect2">
+			<div id="invoice-top" style="min-height:60px">
+				<!--End Info-->
+				<div class="title">
+					<img src="/static/logo/barcode.png" width="50" style="padding-top: 8px" />
+				</div>
+				<div class="title" style="margin-right:5px">
+					<h4>编号：SDJL-CMZX-20191230-002</h4>
+					<p>签发日期：2019年9月25日
+					</p>
+				</div>
+				<!--End Title-->
+			</div>
+			<!--End InvoiceTop-->
+
+
+
+			<div id="invoice-mid" style="min-height:80px">
+
+				<div style="float: left">
+					<img src="/static/logo/logoSmall.png" width="80px" />
+				</div>
+				<div class="invoice-info">
+					<h2>水滴精灵公众科学联盟</h2>
+					<p> http://www.sdjl.com <br>
+					</p>
+				</div>
+
+				<div style="padding-top: 10px; text-align: right">
+					<h2>底栖动物调查与水环境评估简易报告</h2>
+				</div>
+
+			</div>
+			<!--End Invoice Mid-->
+
+			<div id="invoice-bot">
+
+				<div class="invoice-a">
+					<div class="card bg-llgrey">
+						<div class="card-header">
+							<h4>基本信息</h4>
+						</div>
+						<div class="card-body bg-llgrey">
+
+							<div class="row">
+								<div class="col-lg-4">
+									<div class="row">
+										<div class="col-lg-3 keyCls">
+											调查日期
+										</div>
+										<div class="col-lg-9 valueCls">
+											{{ tskInfo.PlanDate }}
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="row">
+										<div class="col-lg-3 keyCls">
+											调查时间
+										</div>
+										<div class="col-lg-9 valueCls">
+											VALUE
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="row">
+										<div class="col-lg-3 keyCls">
+											当日天气
+										</div>
+										<div class="col-lg-9 valueCls">
+											VALUE
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4">
+									<div class="row">
+										<div class="col-lg-3 keyCls">
+											地区名称
+										</div>
+										<div class="col-lg-9 valueCls">
+											{{ tskInfo.Address }}
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="row">
+										<div class="col-lg-3 keyCls">
+											水域名称
+										</div>
+										<div class="col-lg-9 valueCls">
+											{{ tskInfo.River }}
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-4">
+									<div class="row">
+										<div class="col-lg-3 keyCls">
+											检测点位
+										</div>
+										<div class="col-lg-9 valueCls">
+											{{ tskInfo.River }}
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-4">
+									<div class="row">
+										<div class="col-lg-3 keyCls">
+											地理位置
+										</div>
+										<div class="col-lg-9 valueCls">
+											( 经度：{{ tskInfo.Longitude }}, 纬度：{{ tskInfo.Latitude }} )
+										</div>
+									</div>
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+				<div class="invoice-b">
+					<div class="card bg-white">
+						<div class="card-header">
+							<h4>团队成员介绍</h4>
+						</div>
+						<div class="card-body bg-white">
+							<p>
+								机构名称: {{ teamInfo.Name }} <br />
+								团队名称: {{ teamInfo.Name }} <br />
+								参加该任务的组员:
+								{% for item in teamMembers %}
+								{{ item.UserName }},
+								{% endfor %}
+
+								团队风采：<br />
+								{% for item in tskSmps if (item.CategoryID == 13) %}
+								{% if (loop.index < 11) %}
+								<img src='http://www.isupcore.com/{{ item.BADict_Value }}' class='tskimg' />
+								{% endif %}
+								{% endfor %}
+							</p>
+
+							<br />
+
+						</div>
+					</div>
+				</div>
+				<div class="invoice-a">
+					<div class="card bg-llgrey">
+						<div class="card-header">
+							<h4>河流环境及采样情况说明</h4>
+						</div>
+						<div class="card-body bg-llgrey">
+							<p>
+
+								<b>周边情况及理化指标：</b>
+								<div class="row">
+									{% for item in tskSmps if (item.CategoryID == 9) %}
+									{% if loop.index < 9 %}
+									<div class="col-lg-4">
+										<div class="row">
+											<div class="col-lg-6 keyCls2">
+												{{ item.BADict_Desc }}
+											</div>
+											<div class="col-lg-6 valueCls2">
+												{{ item.BADict_Value }}
+											</div>
+										</div>
+									</div>
+
+									{% endif %}
+									{% endfor %}
+
+								</div>
+
+								<br />
+								<b>周边环境：</b><br />
+								{% for item in tskSmps if item.CategoryID == 8 %}
+								{% if (loop.index < 11) %}
+								<img src='http://www.isupcore.com/{{ item.BADict_Value }}' class='tskimg' />
+								{% endif %}
+								{% endfor %}
+
+								<br /><br />
+								<b>采样工具：</b><br />
+								{% for item in tskSmps if item.CategoryID == 10 %}
+								使用工具：{{ item.BADict_ValueDesc }}, 估算所有工具的采集面积总和： {{ item.BADict_Value }} 平方米。<br />
+								{% endfor %}
+
+
+								<br />
+								<b>发现的生物：</b>
+								{{ tskInfo.EvaDesc }}<br />
+								{% for item in tskSmps if item.CategoryID == 7 %}
+								<img src='http://www.isupcore.com/{{ item.BADict_Value }}' class='tskimg' />
+								{% endfor %}
+							</p>
+						</div>
+
+					</div>
+				</div>
+				<div class="invoice-b">
+					<div class="card bg-white">
+						<div class="card-header">
+							<h4>水体评价及专家点评</h4>
+						</div>
+						<div class="card-body bg-white">
+							<p>
+								底栖动物用生命述说水环境的现状。<br />
+								基于底栖动物的水环境综合评价计分：{{ tskInfo.EvaResult }} （总分100）<br />
+								评价级别：该水域总体水质或环境健康状况为 优良 ！<br />
+								注：以上评价属于水质生物学评价范畴，结果可能受采样方法、采样人态度以及其他环境因素的影响。
+							</p>
+
+						</div>
+					</div>
+				</div>
+
+				<div id="legalcopy">
+					<p> 此报告由 <strong>水滴精灵公众科学联盟</strong> 颁发，仅用于证明使用者参与过上述采样活动
+						并在过程中起到了积极的作用。此活动是在专家培训指导后开展的，在此过程中核心参与人员一般能够了
+						解到科学的采样方法、生物识别方法、水质测定指标和方法以及水体测定结果及其含义。此报告无法证明
+						参与者的科学素养及采样过程中的科学性与严谨性，不是严格意义上的科研报告。特此声明。
+					</p>
+				</div>
+
+			</div>
+			<!--End InvoiceBot-->
+		</div>
+		<!--End Invoice-->
+	</div>
+
+</body>
+
+</html>
