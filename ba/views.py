@@ -21,7 +21,7 @@ def mytask():
 
 @app.route('/task_report_mgr')
 def task_report_mgr():
-    return render_template('task/task_report_mgr.html')
+    return render_template('task/task_report_mgr.html', user = sys.getLoginUser())
 
 @app.route('/task_detail/<tsk_id>')
 def task_detail(tsk_id):
