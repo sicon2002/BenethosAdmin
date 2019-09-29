@@ -205,14 +205,16 @@
 						</div>
 						<div class="card-body bg-white">
 							<p>
-								机构名称: {{ teamInfo.Name }} <br />
-								团队名称: {{ teamInfo.Name }} <br />
-								参加该任务的组员:
-								{% for item in teamMembers %}
+								<b>机构名称:</b> <br />{{ teamInfo.Name }} <br />
+								<b>团队名称: </b> <br />{{ teamInfo.Name }} <br />
+								<b>参加该任务的组员: <br /></b>
+								<!-- if item.IsMember==1 -->
+								{% for item in teamMembers if item.UserName %}
 								{{ item.UserName }},
 								{% endfor %}
 
-								团队风采：<br />
+								<br /></br />
+								<b>团队风采：</b><br />
 								{% for item in tskSmps if (item.CategoryID == 13) %}
 								{% if (loop.index < 11) %}
 								<img src='http://www.isupcore.com/{{ item.BADict_Value }}' class='tskimg' />
