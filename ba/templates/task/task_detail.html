@@ -48,21 +48,33 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>姓名 | 电话</th>
-                                <th>是否参与者</th>
-                                <th>是否生成报告</th>
-                                <th>操作</th>
+                                <th>姓名 | 电话 | 微信</th>
+                                <th>是否核心成员</th>
+                                <th>简易报告</th>
+                                <th>科学报告</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for item in members %}
-                            {% if item.IsMember == True %}
+                            {% if item.IsMember == True or 1==1 %}
                             <tr>
                                 <th scope="row">{{ item.Id }}</th>
-                                <td>{{ item.UserName }} | {{ item.Mobile }}</td>
-                                <td><span class="badge badge-primary">{{item.IsMember}}</span></td>
-                                <td>否</td>
-                                <td class="color-primary">生成 | <a href="/report/{{ taskInfo.Id }}">查看</a></td>
+                                <td>{{ item.UserName }} | {{ item.Mobile }} | {{item.WeChat}}</td>
+                                <td>
+                                    {%if item.IsMember==0 %}
+                                    <span class="badge badge-warning">参与者</span>
+                                    {% else %}
+                                    <span class="badge badge-primary">核心人员</span>
+                                    {% endif %}
+                                </td>
+                                <td class="color-primary">
+                                    <a href="/report/{{ taskInfo.Id }}" target="_blank">生成</a>
+                                    | <a href="/report/{{ taskInfo.Id }}" target="_blank">查看</a>
+                                </td>
+                                <td class="color-primary">
+                                    <a href="/report/{{ taskInfo.Id }}" target="_blank">生成</a>
+                                    | <a href="/report/{{ taskInfo.Id }}" target="_blank">查看</a>
+                                </td>
                             </tr>
                             {% endif %}
                             {% endfor %}

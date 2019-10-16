@@ -9,8 +9,7 @@ from ba import app, sys, logic
 # index
 @app.route('/index')
 def index():
-    rt = logic.getAllTeams()
-    return render_template('index.html', teams = rt, user = sys.getLoginUser())
+    return render_template('index.html', user = sys.getLoginUser())
 
 # task
 @app.route('/mytasks')
@@ -56,6 +55,12 @@ def team_members():
     tid = 73
     rt = logic.getUsersByTeamId(tid)
     return render_template('organization/team_members.html', members=rt, user = sys.getLoginUser())
+
+# sysconfig
+
+@app.route('/jobmgr')
+def taskmgr():
+    return render_template('sysconfig/jobmgr.html', user = sys.getLoginUser())
 
 # account
 @app.route('/login')

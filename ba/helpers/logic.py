@@ -79,3 +79,24 @@ class LogicHelper:
             WHERE tsk.Id = %d"%(id)
         )
         return rt
+
+    def getAllImages(self):
+        rt = self.db.queryAll(
+            "SELECT s.id, BADict_ID, BADict_ValType,BADict_Value,s.DeleterUserId, s.TaskID, t.TeamId, tm.Name \
+            FROM NE_AppTaskSamples s \
+            INNER JOIN NE_BADict d ON s.BADict_ID = d.Id \
+            INNER JOIN NE_AppTasks t ON t.Id = s.TaskId \
+            INNER JOIN NE_Teams tm ON tm.Id = t.TeamID \
+            WHERE d.CategoryID IN (7,8,13)  \
+            AND (s.DeleterUserId IS NULL OR s.DeleterUserId <> 1) \
+            "
+        )
+        return rt
+
+    def updateImageHandleStatus(self, id, flg):
+        rt = self.db.updateSql(
+            "UPDATE NE_AppTaskSamples \
+            SET DeleterUserId = %d \
+            WHERE id = %d"%(flg, id)
+        )
+        return rt

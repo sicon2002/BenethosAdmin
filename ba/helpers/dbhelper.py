@@ -94,6 +94,17 @@ class SqlHelper:
     #         print('MySql Error: %s %s'%(e.args[0],e.args[1]))
     #     finally:
     #         self.close()
+
+    def updateSql(self,sql):
+        try:
+            #self.query("set names 'utf8'")
+            self.query(sql)
+            self.commit()
+        except pymssql.Error as e:
+            #self.conn.rollback()
+            print('MySql Error: %s %s'%(e,sql))
+        # finally:
+        #     self.close()
     
     # def getLastInsertRowId(self):
     #     return self.cursor.lastrowid
@@ -101,8 +112,8 @@ class SqlHelper:
     # def getRowCount(self):
     #     return self.cursor.rowcount
     
-    # def commit(self):
-    #     self.conn.commit()
+    def commit(self):
+        self.conn.commit()
     
     def close(self):
         self.cursor.close()
