@@ -217,7 +217,7 @@
 								<b>团队风采：</b><br />
 								{% for item in tskSmps if (item.CategoryID == 13) %}
 								{% if (loop.index < 11) %}
-								<img src='http://www.isupcore.com/{{ item.BADict_Value }}' class='tskimg' />
+								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}' class='tskimg' />
 								{% endif %}
 								{% endfor %}
 							</p>
@@ -259,7 +259,7 @@
 								<b>周边环境：</b><br />
 								{% for item in tskSmps if item.CategoryID == 8 %}
 								{% if (loop.index < 11) %}
-								<img src='http://www.isupcore.com/{{ item.BADict_Value }}' class='tskimg' />
+								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}' class='tskimg' />
 								{% endif %}
 								{% endfor %}
 
@@ -274,7 +274,7 @@
 								<b>发现的生物：</b>
 								{{ tskInfo.EvaDesc }}<br />
 								{% for item in tskSmps if item.CategoryID == 7 %}
-								<img src='http://www.isupcore.com/{{ item.BADict_Value }}' class='tskimg' />
+								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}' class='tskimg' />
 								{% endfor %}
 							</p>
 						</div>

@@ -6,7 +6,13 @@ from flask import render_template, session, request, url_for, redirect
 from ba.models import User
 from ba import app, sys, logic
 
-# index
+#filters
+@app.template_filter('replace')
+def doReplace(orgStr,targetStr,toStr):
+    print(orgStr,targetStr,toStr)
+    return orgStr.replace(targetStr,toStr)
+
+# indexs
 @app.route('/index')
 def index():
     return render_template('index.html', user = sys.getLoginUser())
@@ -40,7 +46,6 @@ def report(guid):
     rtTeamMembers = logic.getUsersByTeamId(rtTaskInfo[0]['TeamID'])
     rtTaskSamples = logic.getTaskDetailByTaskId(tskId)
 
-    print(rtTaskSamples)
     return render_template('report/report.html', tskInfo = rtTaskInfo[0], teamInfo = rtTeamInfo[0], teamMembers = rtTeamMembers, tskSmps = rtTaskSamples )
 
 # team
