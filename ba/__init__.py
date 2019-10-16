@@ -21,10 +21,10 @@ sys = SysHelper()
 logic = LogicHelper()
 
 # # jobs go here
-# app.config.update(jobCfg)
-# scheduler.init_app(app)
-# scheduler.start()
+app.config.update(jobCfg)
+scheduler.init_app(app)
+scheduler.start()
 
-water_mark_handler()
+# water_mark_handler()
 
 from ba import app, views, models, sys, logic

@@ -17,8 +17,8 @@ def add_watermark_fun1(img_pil, text):
 
     font = ImageFont.truetype('simhei.ttf', 30)  # 字体及字体大小
     
-    text_position = (w/2,h-80)
-    text_position_2 = (w/2+2,h-78)
+    text_position = (w/4,h-80)
+    text_position_2 = (w/4+2,h-78)
     # print("org size:", w, h)
     # print("position:", text_position)
     # print("text:",text)
@@ -73,7 +73,7 @@ def add_watermark_fun2(img_pil, text):
 # compress the file and add water mark
 def CompressAndAddWaterMark(fileName, text):
 
-    root_path = "/Users/sicon/working/108_DXSW/BenethosAdmin/Images/"
+    root_path = "C:\WWW\Benthos\Web\publish\wwwroot"
     target_size = 80000.00
     handle_size = 99999.00
     img_path = root_path + fileName
@@ -85,6 +85,7 @@ def CompressAndAddWaterMark(fileName, text):
         
         tmpp = root_path+'tmp.jpg'
         img.thumbnail((x/1, y/1))
+        img = img.convert('RGB')
         img.save(tmpp)
         org_size = os.path.getsize(tmpp)
 
@@ -105,6 +106,7 @@ def CompressAndAddWaterMark(fileName, text):
         return False
 
 def water_mark_handler():
+    print("JOB IMAGE COMPRESS & WATER MARK STARTED...")
     hlp = LogicHelper()
     r = hlp.getAllImages()
     for item in r:
@@ -120,3 +122,5 @@ def water_mark_handler():
         else:
             hlp.updateImageHandleStatus(sampleId, 99)
             print("Image " + picName + " proceed failed, pls see the log for detail." )
+
+    print("JOB IMAGE COMPRESS & WATER MARK DONE...")
