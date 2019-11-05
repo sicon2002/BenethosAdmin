@@ -68,12 +68,10 @@
                                     {% endif %}
                                 </td>
                                 <td class="color-primary">
-                                    <a href="/report/{{ taskInfo.Id }}" target="_blank">生成</a>
-                                    | <a href="/report/{{ taskInfo.Id }}" target="_blank">查看</a>
+                                    <span class="badge badge-danger" style="cursor:hand" onclick="genReport(this)">生成</span>
                                 </td>
                                 <td class="color-primary">
-                                    <a href="/report/{{ taskInfo.Id }}" target="_blank">生成</a>
-                                    | <a href="/report/{{ taskInfo.Id }}" target="_blank">查看</a>
+                                    <a href="/report/{{ taskInfo.Id }}" target="_blank">查看</a>
                                 </td>
                             </tr>
                             {% endif %}
@@ -85,4 +83,13 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        console.log("okay....");
+    });
+
+    var genReport = function(obj){
+        console.log("report generated...");
+    };
+</script>
 {% endblock %}
