@@ -81,7 +81,7 @@
                 <li><a href="/jobmgr">任务管理</a></li>
               </ul>
             </li>
-          <li><a><i class="ti-close"></i> 退出</a></li>
+          <li><a href="javascript:return(0)" onclick="logOut()"><i class="ti-close"></i> 退出</a></li>
         </ul>
       </div>
     </div>
@@ -302,6 +302,10 @@
         editTitle: false
       });
     });
+
+    var logOut = function(){
+      window.location.href = "../login";
+    }
   </script>
 
 {% block script %}
