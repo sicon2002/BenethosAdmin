@@ -1,7 +1,7 @@
 # --encoding:utf-8--
 from ba.helpers.dbhelper import SqlHelper
 from config import dbCfg
-
+from ba.helpers.utils import SysHelper
 
 class LogicHelper:
     version = 0.1
@@ -9,6 +9,7 @@ class LogicHelper:
     def __init__(self):
         self.db = SqlHelper(
             dbCfg['serverName'], dbCfg['userName'], dbCfg['passWord'], dbCfg['dbName'])
+        self.util = SysHelper()
         print('init sys logic...')
 
     # teams
@@ -99,4 +100,48 @@ class LogicHelper:
             SET DeleterUserId = %d \
             WHERE id = %d"%(flg, id)
         )
+        return 'okay'
+
+    # report
+    def generateReport(self, taskid, userid):
+        rptGuid = self.util.genGuid()
+        rptNo = self.util.genRandomNumber(100000, 999999)
+
+        sql = "INSERT INTO NE_Reports(TaskId, UserId, SeqNo, ReportType, ID, IsValid, CreateDate, Comments, GenTimes) \
+            VALUES(%s,%s,%s,'%s','%s',1,'%s','',%s)"%(taskid, userid, rptNo, 'CMZX', rptGuid, '2019-11-11', 1)
+            
+        rt = self.db.updateSql(sql)
+        return 'okay'
+
+    def getReportByIds(self, taskid, userid):
+        rt = self.db.queryAll(
+            "SELECT * FROM NE_Reports \
+            WHERE TaskId = %s AND UserId = %s"%(taskid, userid)
+        )
+        return rt
+
+    def getReportByGuid(self, guid):
+        rt = self.db.queryAll(
+            "SELECT * FROM NE_Reports \
+            WHERE ID = '%s'"%(guid)
+        )
+        return rt
+
+    def increaseReportGenTimes(self, guid):
+        rt = self.db.updateSql(
+            "UPDATE NE_Reports \
+            SET GenTimes = GenTimes+1 \
+            WHERE ID = '%s'"%(guid)
+        )
+        return 'okay'
+
+    def getTaskUserReportByTaskId(self, taskid):
+        sql = "SELECT DISTINCT p.Id, p.ClassName AS UserName, p.SchoolName AS Mobile, p.Wechat, tu.DeleterUserId AS IsMember, r.ID AS RptGuid, r.ReportType, r.SeqNo, r.CreateDate, r.TaskId, r.Comments, r.IsValid, r.GenTimes \
+            FROM NE_AppTasks t \
+            INNER JOIN NE_TeamUsers tu ON tu.TeamId = t.TeamId \
+            INNER JOIN NE_Profiles p ON p.Id = tu.ProfileId \
+            LEFT JOIN NE_Reports r ON r.TaskId = t.Id AND r.UserId = p.Id \
+            WHERE t.Id = %s"%(taskid)
+
+        rt = self.db.queryAll(sql)
         return rt

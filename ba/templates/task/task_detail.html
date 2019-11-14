@@ -61,17 +61,21 @@
                                 <th scope="row">{{ item.Id }}</th>
                                 <td>{{ item.UserName }} | {{ item.Mobile }} | {{item.WeChat}}</td>
                                 <td>
-                                    {%if item.IsMember==0 %}
+                                    {% if item.IsMember==0 %}
                                     <span class="badge badge-warning">参与者</span>
                                     {% else %}
                                     <span class="badge badge-primary">核心人员</span>
                                     {% endif %}
                                 </td>
                                 <td class="color-primary">
-                                    <span class="badge badge-danger" style="cursor:hand" onclick="genReport(this)">生成</span>
+                                    {% if item.IsValid == 1 %}
+                                        <a href="/report/{{ item.RptGuid }}" target="_blank">查看</a>
+                                    {% else %}
+                                        <span class="badge badge-danger" style="cursor:hand" onclick="genReport({{taskInfo.Id}},{{item.Id}})">生成</span>
+                                    {% endif %}
                                 </td>
                                 <td class="color-primary">
-                                    <a href="/report/{{ taskInfo.Id }}" target="_blank">查看</a>
+                                    <a href="/report/{{ item.RptGuid }}" target="_blank">查看</a>
                                 </td>
                             </tr>
                             {% endif %}
@@ -92,8 +96,11 @@
         console.log("okay....");
     });
 
-    var genReport = function(obj){
+    var genReport = function(taskid, userid){
         console.log("report generated...");
+        $.get('/report/gen/'+taskid+'/'+userid+'',null,function(data){
+            window.location.reload();
+        });
     };
 </script>
 {% endblock %}

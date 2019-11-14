@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import sys
+import sys, datetime
 sys.path.append("..")
 
 from flask import render_template, session, request, url_for, redirect
@@ -8,9 +8,15 @@ from ba import app, sys, logic
 
 #filters
 @app.template_filter('replace')
-def doReplace(orgStr,targetStr,toStr):
-    print(orgStr,targetStr,toStr)
+def fReplace(orgStr,targetStr,toStr):
     return orgStr.replace(targetStr,toStr)
+
+@app.template_filter('format')
+def fFormat(orgDate,t):
+    if t == "s":
+        return orgDate.strftime("%Y%m%d")
+    else:
+        return orgDate.strftime("%Y")+u"年"+orgDate.strftime("%m")+u"月"+orgDate.strftime("%d")
 
 # indexs
 @app.route('/index')
@@ -34,19 +40,33 @@ def task_detail(tsk_id):
 
     rtTaskInfo = logic.getTaskById(tskId)
     rtMembers = logic.getUsersByTeamId(rtTaskInfo[0]['TeamID'])
-    return render_template('task/task_detail.html', taskInfo = rtTaskInfo[0], members = rtMembers,  user = sys.getLoginUser())
+    rtMembersWithReportInfo = logic.getTaskUserReportByTaskId(tskId)
+    return render_template('task/task_detail.html', taskInfo = rtTaskInfo[0], members = rtMembersWithReportInfo,  user = sys.getLoginUser())
 
 # report
 @app.route('/report/<guid>')
 def report(guid):
-    tskId = int(guid.encode("utf-8"))
+    r = logic.getReportByGuid(guid)
+    if(len(r) > 0):
+        tskId = r[0]['TaskID']
+        rtTaskInfo = logic.getTaskById(tskId)
+        rtTeamInfo = logic.getTeamById(rtTaskInfo[0]['TeamID'])
+        rtTeamMembers = logic.getUsersByTeamId(rtTaskInfo[0]['TeamID'])
+        rtTaskSamples = logic.getTaskDetailByTaskId(tskId)
 
-    rtTaskInfo = logic.getTaskById(tskId)
-    rtTeamInfo = logic.getTeamById(rtTaskInfo[0]['TeamID'])
-    rtTeamMembers = logic.getUsersByTeamId(rtTaskInfo[0]['TeamID'])
-    rtTaskSamples = logic.getTaskDetailByTaskId(tskId)
-
-    return render_template('report/report.html', tskInfo = rtTaskInfo[0], teamInfo = rtTeamInfo[0], teamMembers = rtTeamMembers, tskSmps = rtTaskSamples )
+        return render_template('report/report.html', rptInfo = r[0], tskInfo = rtTaskInfo[0], teamInfo = rtTeamInfo[0], teamMembers = rtTeamMembers, tskSmps = rtTaskSamples )
+    else:
+        return "暂无报告，如有问题请与管理员联系！"
+@app.route('/report/gen/<taskid>/<userid>')
+def genReport(taskid, userid):
+    rr = logic.getReportByIds(taskid, userid)
+    print(rr)
+    print(len(rr))
+    if(len(rr) > 0):
+        logic.increaseReportGenTimes(rr[0]["ID"])
+    else:
+        r = logic.generateReport(taskid, userid)
+    return ''
 
 # team
 @app.route('/myteams')

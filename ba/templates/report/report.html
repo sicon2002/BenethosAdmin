@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Report</title>
+	<title>简易报告</title>
 
 	<!-- ================= Favicon ================== -->
 	<!-- Standard -->
@@ -79,8 +79,8 @@
 					<img src="/static/logo/barcode.png" width="50" style="padding-top: 8px" />
 				</div>
 				<div class="title" style="margin-right:5px">
-					<h4>编号：SDJL-CMZX-20191230-002</h4>
-					<p>签发日期：2019年9月25日
+					<h4>编号：SDJL-CMZX-{{rptInfo.CreateDate|format("s")}}-{{rptInfo.SeqNo}}</h4>
+					<p>签发日期：{{rptInfo.CreateDate|format("")}}
 					</p>
 				</div>
 				<!--End Title-->
@@ -95,8 +95,8 @@
 					<img src="/static/logo/logoSmall.png" width="80px" />
 				</div>
 				<div class="invoice-info">
-					<h2>水滴精灵公众科学联盟</h2>
-					<p> http://www.sdjl.com <br>
+					<h2>水底精灵公众科学联盟</h2>
+					<p> http://www.waterbugs.cn <br>
 					</p>
 				</div>
 
@@ -269,7 +269,6 @@
 								使用工具：{{ item.BADict_ValueDesc }}, 估算所有工具的采集面积总和： {{ item.BADict_Value }} 平方米。<br />
 								{% endfor %}
 
-
 								<br />
 								<b>发现的生物：</b>
 								{{ tskInfo.EvaDesc }}<br />
@@ -290,15 +289,27 @@
 							<p>
 								底栖动物用生命述说水环境的现状。<br />
 								基于底栖动物的水环境综合评价计分：{{ tskInfo.EvaResult }} （总分100）<br />
-								评价级别：该水域总体水质或环境健康状况为 优良 ！<br />
+								评价级别：该水域总体水质或环境健康状况为 
+								{% if (tskInfo.EvaResult == 0) %}
+									<b>未评估</b>
+								{% elif (tskInfo.EvaResult > 80) %}
+									<b>优良</b>
+								{% elif (tskInfo.EvaResult > 60) %}
+									<b>一般</b>
+								{% elif (tskInfo.EvaResult > 45) %}
+									<b>较差</b>
+								{% elif (tskInfo.EvaResult == 0) %}
+									<b>非常差</b>
+								{% endif %}
+								！<br />
 								注：以上评价属于水质生物学评价范畴，结果可能受采样方法、采样人态度以及其他环境因素的影响。
 							</p>
 						</div>
 					</div>
 				</div>
-
+·
 				<div id="legalcopy">
-					<p> 此报告由 <strong>水滴精灵公众科学联盟</strong> 颁发，仅用于证明使用者参与过上述采样活动
+					<p> 此报告由 <strong>水底精灵公众科学联盟</strong> 颁发，仅用于证明使用者参与过上述采样活动
 						并在过程中起到了积极的作用。此活动是在专家培训指导后开展的，在此过程中核心参与人员一般能够了
 						解到科学的采样方法、生物识别方法、水质测定指标和方法以及水体测定结果及其含义。此报告非严格意
 						义上的科研报告。特此声明。
