@@ -2,30 +2,32 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
+	<meta charset="GB2312">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>简易报告</title>
-
-	<!-- ================= Favicon ================== -->
-	<!-- Standard -->
-	<link rel="shortcut icon" href="http://placehold.it/64.png/000/fff">
-	<!-- Retina iPad Touch Icon-->
-	<link rel="apple-touch-icon" sizes="144x144" href="http://placehold.it/144.png/000/fff">
-	<!-- Retina iPhone Touch Icon-->
-	<link rel="apple-touch-icon" sizes="114x114" href="http://placehold.it/114.png/000/fff">
-	<!-- Standard iPad Touch Icon-->
-	<link rel="apple-touch-icon" sizes="72x72" href="http://placehold.it/72.png/000/fff">
-	<!-- Standard iPhone Touch Icon-->
-	<link rel="apple-touch-icon" sizes="57x57" href="http://placehold.it/57.png/000/fff">
-
 	<!-- Styles -->
 	<link href="/static/assets/fontAwesome/css/fontawesome-all.min.css" rel="stylesheet">
 	<link href="/static/assets/css/lib/themify-icons.css" rel="stylesheet">
 	<link href="/static/assets/css/lib/bootstrap.min.css" rel="stylesheet">
 	<link href="/static/assets/css/lib/nixon.css" rel="stylesheet">
 	<link href="/static/assets/css/style.css" rel="stylesheet">
+
+	<script src="/static/assets/js/lib/jquery.min.js"></script>
+	<script src="/static/assets/lib/html2canvas.js"></script>
+
+	<script>
+		function genPng() {
+			console.log('gen');
+
+			html2canvas(document.querySelector("#invoice")).then(function (canvas) {
+				document.body.appendChild(canvas);
+			});
+
+			// document.querySelector("#dom2").innerHTML = document.querySelector("#rpt").innerHTML;
+		}
+	</script>
 	<style>
 		.invoice-a {
 			padding: 0px !important;
@@ -62,16 +64,16 @@
 			font-weight: bold;
 		}
 
-		.tskimg{
-			width:200px;
-			height:200px;
-			padding:5px;
+		.tskimg {
+			width: 200px;
+			height: 200px;
+			padding: 5px;
 		}
 	</style>
 </head>
 
 <body>
-	<div class="container">
+	<div class="container" id="rpt">
 		<div id="invoice" class="effect2">
 			<div id="invoice-top" style="min-height:60px">
 				<!--End Info-->
@@ -217,7 +219,8 @@
 								<b>团队风采：</b><br />
 								{% for item in tskSmps if (item.CategoryID == 13) %}
 								{% if (loop.index < 11) %}
-								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}' class='tskimg' />
+								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}'
+									class='tskimg' />
 								{% endif %}
 								{% endfor %}
 							</p>
@@ -259,7 +262,8 @@
 								<b>周边环境：</b><br />
 								{% for item in tskSmps if item.CategoryID == 8 %}
 								{% if (loop.index < 11) %}
-								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}' class='tskimg' />
+								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}'
+									class='tskimg' />
 								{% endif %}
 								{% endfor %}
 
@@ -273,7 +277,8 @@
 								<b>发现的生物：</b>
 								{{ tskInfo.EvaDesc }}<br />
 								{% for item in tskSmps if item.CategoryID == 7 %}
-								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}' class='tskimg' />
+								<img src='http://www.isupcore.com/{{ item.BADict_Value | replace(".JPG","-sw.JPG") }}'
+									class='tskimg' />
 								{% endfor %}
 							</p>
 						</div>
@@ -289,17 +294,17 @@
 							<p>
 								底栖动物用生命述说水环境的现状。<br />
 								基于底栖动物的水环境综合评价计分：{{ tskInfo.EvaResult }} （总分100）<br />
-								评价级别：该水域总体水质或环境健康状况为 
+								评价级别：该水域总体水质或环境健康状况为
 								{% if (tskInfo.EvaResult == 0) %}
-									<b>未评估</b>
+								<b>未评估</b>
 								{% elif (tskInfo.EvaResult > 80) %}
-									<b>优良</b>
+								<b>优良</b>
 								{% elif (tskInfo.EvaResult > 60) %}
-									<b>一般</b>
+								<b>一般</b>
 								{% elif (tskInfo.EvaResult > 45) %}
-									<b>较差</b>
+								<b>较差</b>
 								{% elif (tskInfo.EvaResult == 0) %}
-									<b>非常差</b>
+								<b>非常差</b>
 								{% endif %}
 								！<br />
 								注：以上评价属于水质生物学评价范畴，结果可能受采样方法、采样人态度以及其他环境因素的影响。
@@ -307,7 +312,6 @@
 						</div>
 					</div>
 				</div>
-·
 				<div id="legalcopy">
 					<p> 此报告由 <strong>水底精灵公众科学联盟</strong> 颁发，仅用于证明使用者参与过上述采样活动
 						并在过程中起到了积极的作用。此活动是在专家培训指导后开展的，在此过程中核心参与人员一般能够了
@@ -322,6 +326,8 @@
 		<!--End Invoice-->
 	</div>
 
+	<button onclick="genPng()">GEN</button>
+	<div id='dom2'></div>
 </body>
 
 </html>
